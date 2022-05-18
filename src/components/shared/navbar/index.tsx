@@ -2,14 +2,14 @@ import React from 'react'
 import Link from 'next/Link'
 import { LINKS } from './constants'
 
-import styles from './Navbar.module.css'
+import styles from './Navbar.module.scss'
 
 const NavBar = ({}: any) => {
   return (
     <nav className={styles.navbar}>
-      <ul>
+      <ul className={styles.navbarList}>
         {LINKS.map(({ href, label }: { href: string; label: string }) => (
-          <li key={href}>
+          <li className={styles.navbarItem} key={href}>
             <Link href={href}>{label}</Link>
           </li>
         ))}

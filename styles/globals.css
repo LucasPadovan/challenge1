@@ -6,6 +6,33 @@ body {
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 0;
+  grid-auto-rows: auto;
+}
+
+.grid-nav {
+  grid-column: 1 / 4;
+  grid-row: 1;
+}
+
+.grid-left {
+  grid-column: 1 / 2;
+  grid-row: 2;
+}
+
+.grid-right {
+  grid-column: 2 / 4;
+  grid-row: 2;
+}
+
+.grid-footer {
+  grid-column: 1 / 4;
+  grid-row: 3;
+}
+
 a {
   color: inherit;
   text-decoration: none;
@@ -13,4 +40,17 @@ a {
 
 * {
   box-sizing: border-box;
+}
+
+:root {
+  --ivory: #f4e8c1;
+  --blue-green: #a0c1b8;
+  --blueish: #709fb0;
+  --jacaranda: #726a95;
+  --malbec: #351f39;
+
+  --background: var(--blueish);
+  --backgroundHover: var(--jacaranda);
+
+  --standardTransition: all 0.3s ease-in-out;
 }
