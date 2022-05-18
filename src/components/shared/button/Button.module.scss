@@ -1,0 +1,23 @@
+.button {
+  padding: 10px 20px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  text-transform: capitalize;
+  transition: var(--standardTransition);
+
+  &:hover {
+    transform: scale(1.05);
+  }
+}
+
+.primary {
+  color: white;
+  background-color: var(--background);
+}
+
+.secondary {
+  color: var(--background);
+  background-color: white;
+}

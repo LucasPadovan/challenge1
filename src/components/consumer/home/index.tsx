@@ -4,7 +4,7 @@ import Heading from '../../shared/heading'
 import styles from './Home.module.scss'
 
 const Home: NextPage = () => (
-  <div className={styles.container}>
+  <>
     <Head>
       <title>Peek Challenge</title>
       <meta
@@ -31,7 +31,7 @@ const Home: NextPage = () => (
         </a>
       </div>
     </main>
-  </div>
+  </>
 )
 
 export default Home

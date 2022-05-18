@@ -1,0 +1,15 @@
+.inputGroup {
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.errorField {
+  color: var(--errorColor);
+}
+
+.input {
+  padding: 5px 10px;
+  border-radius: 4px;
+  border: 2px solid var(--backgroundHover);
+}
