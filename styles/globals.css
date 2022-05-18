@@ -49,8 +49,9 @@ a {
   --jacaranda: #726a95;
   --malbec: #351f39;
 
-  --background: var(--blueish);
+  --background: var(--malbec);
   --backgroundHover: var(--jacaranda);
 
   --standardTransition: all 0.3s ease-in-out;
+  --link: var(--malbec);
 }

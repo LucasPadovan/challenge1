@@ -21,10 +21,10 @@
     flex: 1 1 auto;
     text-align: center;
     padding: 10px;
+    color: white;
     transition: var(--standardTransition);
 
     &:hover {
-      color: white;
       background-color: var(--backgroundHover);
     }
   }
