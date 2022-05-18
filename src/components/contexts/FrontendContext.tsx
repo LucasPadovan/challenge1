@@ -5,11 +5,13 @@ const USER_ID_KEY = 'userId'
 export interface IFrontendContextMethods {
   setModalContent: (content: IModalContent) => void
   setIsModalOpen: (value: boolean) => void
+  setIsLoading: (value: boolean) => void
   setUserId: (userId: string) => void
 }
 export interface IFrontendContextState {
   modalContent: IModalContent
   isModalOpen: boolean
+  isLoading: boolean
   userId: string
 }
 
@@ -49,6 +51,7 @@ export const useFrontendContext = () => {
 const FrontendContextProvider = (props: { children: React.ReactElement }) => {
   const [modalContent, setModalContent] = React.useState<IModalContent>({})
   const [isModalOpen, setIsModalOpen] = React.useState<boolean>(false)
+  const [isLoading, setIsLoading] = React.useState<boolean>(false)
   const [userId, setUserId] = React.useState<string>('')
 
   React.useEffect(() => {
@@ -67,11 +70,13 @@ const FrontendContextProvider = (props: { children: React.ReactElement }) => {
     methods: {
       setModalContent,
       setIsModalOpen,
+      setIsLoading,
       setUserId
     },
     state: {
       modalContent,
       isModalOpen,
+      isLoading,
       userId
     }
   }

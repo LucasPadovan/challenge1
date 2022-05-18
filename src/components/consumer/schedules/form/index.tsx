@@ -7,15 +7,18 @@ import InputField from '../../../shared/form/InputField'
 import Button from '../../../shared/button'
 
 import styles from './SchedulesForm.module.scss'
-import { testTimeEntry, timeRegex } from '../../../../utils/time'
+import { dateRegex, testTimeEntry, timeRegex } from '../../../../utils/time'
+import { useSchedulesContext } from '../../../contexts/SchedulesContext'
+import { useFrontendContext } from '../../../contexts/FrontendContext'
 
 const ScheduleSchema = Yup.object({
   activityName: Yup.string()
     .max(150, 'Must be 150 characters or less')
     .required('Required'),
   date: Yup.string()
-    .max(20, 'Must be 20 characters or less')
-    .required('Required'),
+    .required('Required')
+    .max(10, 'Must be 10 characters or less')
+    .matches(dateRegex, 'Date format should be mm/dd/yyyy'),
   startTime: Yup.string()
     .required('Required')
     .matches(timeRegex, 'Time format should be HH:MM')
@@ -30,6 +33,9 @@ const ScheduleSchema = Yup.object({
 })
 
 const SchedulesForm = ({ scheduleValues }: { scheduleValues?: ISchedule }) => {
+  const schedulesContext = useSchedulesContext()
+  const frontendContext = useFrontendContext()
+
   const initialValues = scheduleValues ?? {
     activityName: '',
     date: '',
@@ -43,11 +49,16 @@ const SchedulesForm = ({ scheduleValues }: { scheduleValues?: ISchedule }) => {
       <Formik
         initialValues={initialValues}
         validationSchema={ScheduleSchema}
-        onSubmit={(values, { setSubmitting }) => {
+        onSubmit={(values, { setSubmitting, resetForm }) => {
+          frontendContext.methods.setIsLoading(true)
+
           setTimeout(() => {
-            alert(JSON.stringify(values, null, 2))
+            schedulesContext.methods.addSchedule(values)
+
+            frontendContext.methods.setIsLoading(false)
 
             setSubmitting(false)
+            resetForm()
           }, 400)
         }}
       >

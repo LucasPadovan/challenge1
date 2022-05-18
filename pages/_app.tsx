@@ -5,27 +5,32 @@ import Footer from '../src/components/shared/footer'
 import Instructions from '../src/components/shared/instructions'
 import FrontendContext from '../src/components/contexts/FrontendContext'
 import SchedulesContext from '../src/components/contexts/SchedulesContext'
+import NotificationsContext from '../src/components/contexts/NotificationsContext'
+import Notification from '../src/components/shared/notification'
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <FrontendContext.Provider>
-      <SchedulesContext.Provider>
-        <div className="grid-container">
-          <div className="grid-nav">
-            <NavBar />
+    <NotificationsContext.Provider>
+      <FrontendContext.Provider>
+        <SchedulesContext.Provider>
+          <div className="grid-container">
+            <div className="grid-nav">
+              <NavBar />
+            </div>
+            <div className="grid-left">
+              <Instructions />
+            </div>
+            <div className="grid-right">
+              <Notification />
+              <Component {...pageProps} />
+            </div>
+            <div className="grid-footer">
+              <Footer />
+            </div>
           </div>
-          <div className="grid-left">
-            <Instructions />
-          </div>
-          <div className="grid-right">
-            <Component {...pageProps} />
-          </div>
-          <div className="grid-footer">
-            <Footer />
-          </div>
-        </div>
-      </SchedulesContext.Provider>
-    </FrontendContext.Provider>
+        </SchedulesContext.Provider>
+      </FrontendContext.Provider>
+    </NotificationsContext.Provider>
   )
 }
 

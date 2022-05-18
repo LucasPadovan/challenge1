@@ -4,4 +4,5 @@ export interface ISchedule {
   startTime: string
   endTime: string
   numMaxGuests: number
+  id?: string
 }

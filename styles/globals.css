@@ -27,6 +27,7 @@ body {
   grid-column: 1 / 5;
   grid-row: 2;
   padding: 0 2rem;
+  position: relative;
 }
 
 .grid-footer {
@@ -52,7 +53,10 @@ a {
 
   --background: var(--malbec);
   --backgroundHover: var(--jacaranda);
+  --alertColor: #ccaa00;
   --errorColor: #cc0000;
+  --infoColor: #00aacc;
+  --successColor: rgba(35, 79, 34);
 
   --standardTransition: all 0.3s ease-in-out;
   --link: var(--malbec);

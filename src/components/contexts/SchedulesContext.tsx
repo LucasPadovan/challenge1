@@ -1,14 +1,17 @@
 import React from 'react'
+import { ISchedule } from '../consumer/schedules/constants'
+import { useFrontendContext } from './FrontendContext'
+import { useNotificationsContext } from './NotificationsContext'
+
+const SCHEDULES_KEY = 'schedules'
 
 export interface ISchedulesContextMethods {
-  setModalContent: (content: IModalContent) => void
-  setIsModalOpen: (value: boolean) => void
-  setUserId: (userId: string) => void
+  addSchedule: (schedule: ISchedule) => void
+  // removeSchedule: (value: boolean) => void
+  // updateSchedule: (userId: string) => void
 }
 export interface ISchedulesContextState {
-  modalContent: IModalContent
-  isModalOpen: boolean
-  userId: string
+  userSchedules: ISchedule[]
 }
 
 export interface ISchedulesContextProviderProps {
@@ -45,22 +48,57 @@ export const useSchedulesContext = () => {
 }
 
 const SchedulesContextProvider = (props: { children: React.ReactElement }) => {
-  const [modalContent, setModalContent] = React.useState<IModalContent>({})
-  const [isModalOpen, setIsModalOpen] = React.useState<boolean>(false)
-  const [userId, setUserId] = React.useState<string>('')
+  const frontendContext = useFrontendContext()
+  const notificationsContext = useNotificationsContext()
+  const _userId = frontendContext.state.userId
 
-  React.useEffect(() => {}, [])
+  const [userSchedules, setUserSchedules] = React.useState<ISchedule[]>([])
+
+  React.useEffect(() => {
+    const schedules = localStorage.getItem(SCHEDULES_KEY)
+    frontendContext.methods.setIsLoading(true)
+
+    if (schedules) {
+      const _userSchedules = JSON.parse(schedules)[_userId]
+      setUserSchedules(_userSchedules ?? [])
+      frontendContext.methods.setIsLoading(false)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [_userId])
+
+  React.useEffect(() => {
+    localStorage.setItem(
+      SCHEDULES_KEY,
+      JSON.stringify({ [_userId]: userSchedules })
+    )
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [userSchedules])
+
+  const addSchedule = (newSchedule: ISchedule) => {
+    const _newSchedule = {
+      ...newSchedule,
+      id: `${new Date().getTime()}`
+    }
+
+    const _userSchedules = [...userSchedules, { ..._newSchedule }]
+
+    setUserSchedules(_userSchedules)
+    notificationsContext.methods.setGeneralNotification({
+      type: 'success',
+      message: 'Schedule added correctly. Click on `My Schedules` to see it.'
+    })
+
+    // TODO: error handler when we have a proper API
+  }
 
   const exportedValues: ISchedulesContextProviderProps = {
     methods: {
-      setModalContent,
-      setIsModalOpen,
-      setUserId
+      addSchedule
+      // removeSchedule,
+      // updateSchedule
     },
     state: {
-      modalContent,
-      isModalOpen,
-      userId
+      userSchedules
     }
   }
 
