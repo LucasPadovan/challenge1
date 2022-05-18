@@ -27,10 +27,6 @@ interface IModalContent {
     shouldShowClose?: boolean
   }
   content?: React.ReactElement
-  actions?: {
-    primaryAction?: { cta: string; onClick: () => void }
-    secondaryAction?: { cta: string; onClick: () => void }
-  }
   className?: string
   onClose?: () => void
 }

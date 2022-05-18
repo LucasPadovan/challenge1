@@ -1,4 +1,5 @@
 import React from 'react'
+import { groupSchedulesByDate } from '../../utils/schedules'
 import { ISchedule } from '../consumer/schedules/constants'
 import { useFrontendContext } from './FrontendContext'
 import { useNotificationsContext } from './NotificationsContext'
@@ -9,29 +10,16 @@ export interface ISchedulesContextMethods {
   addSchedule: (schedule: ISchedule) => void
   // removeSchedule: (value: boolean) => void
   // updateSchedule: (userId: string) => void
+  setScheduleByDate: (schedules: any) => void
 }
 export interface ISchedulesContextState {
-  userSchedules: ISchedule[]
+  userSchedules: ISchedule[] | undefined
+  scheduleByDate: any
 }
 
 export interface ISchedulesContextProviderProps {
   methods: ISchedulesContextMethods
   state: ISchedulesContextState
-}
-
-interface IModalContent {
-  header?: {
-    icon?: React.ReactElement
-    title?: string
-    shouldShowClose?: boolean
-  }
-  content?: React.ReactElement
-  actions?: {
-    primaryAction?: { cta: string; onClick: () => void }
-    secondaryAction?: { cta: string; onClick: () => void }
-  }
-  className?: string
-  onClose?: () => void
 }
 
 const SchedulesContext =
@@ -52,13 +40,16 @@ const SchedulesContextProvider = (props: { children: React.ReactElement }) => {
   const notificationsContext = useNotificationsContext()
   const _userId = frontendContext.state.userId
 
-  const [userSchedules, setUserSchedules] = React.useState<ISchedule[]>([])
+  const [userSchedules, setUserSchedules] = React.useState<
+    ISchedule[] | undefined
+  >()
+  const [scheduleByDate, setScheduleByDate] = React.useState<any>([])
 
   React.useEffect(() => {
     const schedules = localStorage.getItem(SCHEDULES_KEY)
     frontendContext.methods.setIsLoading(true)
 
-    if (schedules) {
+    if (_userId && schedules) {
       const _userSchedules = JSON.parse(schedules)[_userId]
       setUserSchedules(_userSchedules ?? [])
       frontendContext.methods.setIsLoading(false)
@@ -67,10 +58,14 @@ const SchedulesContextProvider = (props: { children: React.ReactElement }) => {
   }, [_userId])
 
   React.useEffect(() => {
-    localStorage.setItem(
-      SCHEDULES_KEY,
-      JSON.stringify({ [_userId]: userSchedules })
-    )
+    if (userSchedules) {
+      localStorage.setItem(
+        SCHEDULES_KEY,
+        JSON.stringify({ [_userId]: userSchedules })
+      )
+    }
+
+    setScheduleByDate(groupSchedulesByDate(userSchedules))
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userSchedules])
 
@@ -80,7 +75,7 @@ const SchedulesContextProvider = (props: { children: React.ReactElement }) => {
       id: `${new Date().getTime()}`
     }
 
-    const _userSchedules = [...userSchedules, { ..._newSchedule }]
+    const _userSchedules = [...(userSchedules ?? []), { ..._newSchedule }]
 
     setUserSchedules(_userSchedules)
     notificationsContext.methods.setGeneralNotification({
@@ -93,12 +88,14 @@ const SchedulesContextProvider = (props: { children: React.ReactElement }) => {
 
   const exportedValues: ISchedulesContextProviderProps = {
     methods: {
-      addSchedule
+      addSchedule,
       // removeSchedule,
-      // updateSchedule
+      // updateSchedule,
+      setScheduleByDate
     },
     state: {
-      userSchedules
+      userSchedules,
+      scheduleByDate
     }
   }
 
