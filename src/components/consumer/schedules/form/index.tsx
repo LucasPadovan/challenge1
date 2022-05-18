@@ -7,6 +7,7 @@ import InputField from '../../../shared/form/InputField'
 import Button from '../../../shared/button'
 
 import styles from './SchedulesForm.module.scss'
+import { testTimeEntry, timeRegex } from '../../../../utils/time'
 
 const ScheduleSchema = Yup.object({
   activityName: Yup.string()
@@ -15,8 +16,16 @@ const ScheduleSchema = Yup.object({
   date: Yup.string()
     .max(20, 'Must be 20 characters or less')
     .required('Required'),
-  startTime: Yup.string().required('Required'),
-  endTime: Yup.string().required('Required'),
+  startTime: Yup.string()
+    .required('Required')
+    .matches(timeRegex, 'Time format should be HH:MM')
+    // todo starting time should not be after ending time.
+    .test('', 'Max time allowed is 23:59', value => testTimeEntry(value)),
+  endTime: Yup.string()
+    .required('Required')
+    .matches(timeRegex, 'Time format should be HH:MM')
+    // todo starting time should not be after ending time.
+    .test('', 'Max time allowed is 23:59', value => testTimeEntry(value)),
   numMaxGuests: Yup.number().required('Required')
 })
 
