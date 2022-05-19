@@ -4,6 +4,8 @@ import { ISchedule } from '../consumer/schedules/constants'
 import { useFrontendContext } from './FrontendContext'
 import { useNotificationsContext } from './NotificationsContext'
 
+import remove from 'lodash/remove'
+
 const SCHEDULES_KEY = 'schedules'
 
 export interface ISchedulesContextMethods {
@@ -74,6 +76,7 @@ const SchedulesContextProvider = (props: { children: React.ReactElement }) => {
   const addSchedule = (newSchedule: ISchedule) => {
     const _newSchedule = {
       ...newSchedule,
+      // Mocking a DB id, far from ideal but enough for the excersice
       id: `${new Date().getTime()}`
     }
 
@@ -88,8 +91,20 @@ const SchedulesContextProvider = (props: { children: React.ReactElement }) => {
     // TODO: error handler when we have a proper API
   }
 
+  const removeFromArray = (scheduleId: string) => {
+    // lodash' remove mutates the object, we create a new one for the update to work properly
+    let _userSchedules = [...(userSchedules ?? [])]
+    remove(_userSchedules ?? [], userSchedule => {
+      return userSchedule.id == scheduleId
+    })
+
+    return _userSchedules
+  }
+
   const removeSchedule = (scheduleId: string) => {
-    setUserSchedules(userSchedules)
+    const _userSchedules = removeFromArray(scheduleId)
+
+    setUserSchedules(_userSchedules)
     notificationsContext.methods.setGeneralNotification({
       type: 'error',
       message: 'Schedule removed correctly.'
@@ -97,7 +112,10 @@ const SchedulesContextProvider = (props: { children: React.ReactElement }) => {
   }
 
   const updateSchedule = (schedule: ISchedule) => {
-    setUserSchedules(userSchedules)
+    const _userSchedules = removeFromArray(schedule.id ?? '')
+    _userSchedules.push(schedule)
+
+    setUserSchedules(_userSchedules)
     notificationsContext.methods.setGeneralNotification({
       type: 'info',
       message: 'Schedule updated correctly.'
