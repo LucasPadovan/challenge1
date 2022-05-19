@@ -58,6 +58,7 @@ const SchedulesContextProvider = (props: { children: React.ReactElement }) => {
   }, [_userId])
 
   React.useEffect(() => {
+    // Mocks DB query
     if (userSchedules) {
       localStorage.setItem(
         SCHEDULES_KEY,
@@ -65,6 +66,7 @@ const SchedulesContextProvider = (props: { children: React.ReactElement }) => {
       )
     }
 
+    // Allows for a simpler object to keep the schedules and the sorting is done on a single place.
     setScheduleByDate(groupSchedulesByDate(userSchedules))
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userSchedules])
@@ -86,8 +88,21 @@ const SchedulesContextProvider = (props: { children: React.ReactElement }) => {
     // TODO: error handler when we have a proper API
   }
 
-  const removeSchedule = (scheduleId: string) => {}
-  const updateSchedule = (schedule: ISchedule) => {}
+  const removeSchedule = (scheduleId: string) => {
+    setUserSchedules(userSchedules)
+    notificationsContext.methods.setGeneralNotification({
+      type: 'error',
+      message: 'Schedule removed correctly.'
+    })
+  }
+
+  const updateSchedule = (schedule: ISchedule) => {
+    setUserSchedules(userSchedules)
+    notificationsContext.methods.setGeneralNotification({
+      type: 'info',
+      message: 'Schedule updated correctly.'
+    })
+  }
 
   const exportedValues: ISchedulesContextProviderProps = {
     methods: {

@@ -1,4 +1,5 @@
 import React from 'react'
+import { useFrontendContext } from '../../../contexts/FrontendContext'
 import { useSchedulesContext } from '../../../contexts/SchedulesContext'
 import Button from '../../../shared/button'
 import { ISchedule } from '../constants'
@@ -8,6 +9,7 @@ import styles from './ScheduleInfo.module.scss'
 
 const ScheduleInfo = ({ schedule }: { schedule: ISchedule }) => {
   const schedulesContext = useSchedulesContext()
+  const frontendContext = useFrontendContext()
   const [isEditing, setIsEditing] = React.useState<boolean>(false)
 
   let content = (
@@ -32,7 +34,12 @@ const ScheduleInfo = ({ schedule }: { schedule: ISchedule }) => {
         <Button
           style="secondary"
           onClick={() => {
-            // schedulesContext.methods.deleteSchedule()
+            schedulesContext.methods.removeSchedule(schedule.id ?? '')
+            frontendContext.methods.setIsModalOpen(false)
+
+            setTimeout(() => {
+              window.scrollTo({ top: 0, behavior: 'smooth' })
+            }, 100)
           }}
           title="Delete"
         />

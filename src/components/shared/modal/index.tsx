@@ -51,14 +51,11 @@ const ModalContainer = () => {
   return (
     <Modal
       isOpen={frontendContext.state.isModalOpen}
-      // setIsModalOpen={frontendContext.methods.setIsModalOpen}
-      // modalTitle={modalTitle}
       className={frontendContext.state.modalContent.className}
       onRequestClose={frontendContext.state.modalContent.onClose}
-      // shouldShowClose={
-      //   frontendContext.state.modalContent.header?.shouldShowClose
-      // }
       style={customStyles}
+      // Ideally I would not do this. Just for the excersice because it is simpler to have it disabled
+      ariaHideApp={false}
     >
       <div className={styles.modalContent}>
         <button

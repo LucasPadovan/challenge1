@@ -58,6 +58,10 @@ const SchedulesForm = ({ scheduleValues }: { scheduleValues?: ISchedule }) => {
       if (scheduleValues) {
         schedulesContext.methods.updateSchedule(values)
         frontendContext.methods.setIsModalOpen(false)
+
+        setTimeout(() => {
+          window.scrollTo({ top: 0, behavior: 'smooth' })
+        }, 100)
       } else {
         schedulesContext.methods.addSchedule(values)
       }
