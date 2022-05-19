@@ -1,20 +1,19 @@
-import { testTimeEntry } from './time'
+import { groupSchedulesByDate, sortSchedulesByDate } from './schedules'
 
-describe('Time tests', () => {
-  describe('testTimeEntry', () => {
-    const validEntries = ['12:33', '01:27', '00:00', '23:59']
-    const invalidEntries = ['33:59', '24:00', '23:60']
+import { schedules1 } from '../__fixtures__/schedules'
+import { groupedSchedules1 } from '../__fixtures__/groupedSchedules'
+import { orderedGroupedSchedules1 } from '../__fixtures__/orderedGroupedSchedules'
 
-    validEntries.forEach(entry => {
-      it(`should return true for entries like ${entry}`, () => {
-        expect(testTimeEntry(entry)).toEqual(true)
-      })
+describe('Schedules tests', () => {
+  describe('groupSchedulesByDate', () => {
+    it('Should group the schedules by date', () => {
+      expect(groupSchedulesByDate(schedules1)).toEqual(groupedSchedules1)
     })
+  })
 
-    invalidEntries.forEach(entry => {
-      it(`should return false for entries like ${entry}`, () => {
-        expect(testTimeEntry(entry)).toEqual(false)
-      })
+  describe('sortSchedulesByDate', () => {
+    it('Should order the groups the schedules by date', () => {
+      expect(sortSchedulesByDate(schedules1)).toEqual(orderedGroupedSchedules1)
     })
   })
 })
