@@ -1,0 +1,19 @@
+.scheduleInfoContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: stretch;
+}
+
+.scheduleInfoRow:not(:last-child) {
+  margin: 0 0 10px;
+}
+
+.scheduleInfoRow:last-child {
+  margin: 20px 0 0;
+
+  button {
+    margin: 0 10px;
+  }
+}

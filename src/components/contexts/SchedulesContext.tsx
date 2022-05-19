@@ -8,8 +8,8 @@ const SCHEDULES_KEY = 'schedules'
 
 export interface ISchedulesContextMethods {
   addSchedule: (schedule: ISchedule) => void
-  // removeSchedule: (value: boolean) => void
-  // updateSchedule: (userId: string) => void
+  removeSchedule: (scheduleId: string) => void
+  updateSchedule: (schedule: ISchedule) => void
   setScheduleByDate: (schedules: any) => void
 }
 export interface ISchedulesContextState {
@@ -86,11 +86,14 @@ const SchedulesContextProvider = (props: { children: React.ReactElement }) => {
     // TODO: error handler when we have a proper API
   }
 
+  const removeSchedule = (scheduleId: string) => {}
+  const updateSchedule = (schedule: ISchedule) => {}
+
   const exportedValues: ISchedulesContextProviderProps = {
     methods: {
       addSchedule,
-      // removeSchedule,
-      // updateSchedule,
+      removeSchedule,
+      updateSchedule,
       setScheduleByDate
     },
     state: {

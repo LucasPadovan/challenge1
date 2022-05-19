@@ -44,23 +44,37 @@ const SchedulesForm = ({ scheduleValues }: { scheduleValues?: ISchedule }) => {
     numMaxGuests: 0
   }
 
+  const title = scheduleValues
+    ? 'Update this activity'
+    : 'Schedule this activity'
+
+  const handleSubmit = (
+    values: ISchedule,
+    { setSubmitting, resetForm }: any
+  ) => {
+    frontendContext.methods.setIsLoading(true)
+
+    setTimeout(() => {
+      if (scheduleValues) {
+        schedulesContext.methods.updateSchedule(values)
+        frontendContext.methods.setIsModalOpen(false)
+      } else {
+        schedulesContext.methods.addSchedule(values)
+      }
+
+      frontendContext.methods.setIsLoading(false)
+
+      setSubmitting(false)
+      resetForm()
+    }, 400)
+  }
+
   return (
     <>
       <Formik
         initialValues={initialValues}
         validationSchema={ScheduleSchema}
-        onSubmit={(values, { setSubmitting, resetForm }) => {
-          frontendContext.methods.setIsLoading(true)
-
-          setTimeout(() => {
-            schedulesContext.methods.addSchedule(values)
-
-            frontendContext.methods.setIsLoading(false)
-
-            setSubmitting(false)
-            resetForm()
-          }, 400)
-        }}
+        onSubmit={handleSubmit}
       >
         <Form className={styles.form}>
           <InputField
@@ -94,7 +108,7 @@ const SchedulesForm = ({ scheduleValues }: { scheduleValues?: ISchedule }) => {
             placeholder="2"
           />
 
-          <Button type="submit" title="Schedule this activity" />
+          <Button type="submit" title={title} />
         </Form>
       </Formik>
     </>
