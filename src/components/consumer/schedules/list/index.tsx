@@ -1,6 +1,8 @@
 import React from 'react'
 import { useSchedulesContext } from '../../../contexts/SchedulesContext'
-import { ISchedule } from '../constants'
+import DailySchedule from '../daily'
+
+import styles from './SchedulesList.module.scss'
 
 const SchedulesList = () => {
   const schedulesContext = useSchedulesContext()
@@ -19,10 +21,19 @@ const SchedulesList = () => {
   }
 
   return (
-    <div>
-      {schedulesByDate.map((schedule: ISchedule) => {
-        return <div key={schedule.id}>{schedule.activityName}</div>
-      })}
+    <div className={styles.calendarListContainer}>
+      <div className={styles.calendarList}>
+        {Object.keys(schedulesByDate).map((day: string) => {
+          return (
+            <div key={day}>
+              <DailySchedule
+                day={day}
+                schedulesForThisDay={schedulesByDate[day]}
+              />
+            </div>
+          )
+        })}
+      </div>
     </div>
   )
 }

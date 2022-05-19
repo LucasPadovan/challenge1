@@ -8,9 +8,6 @@ import SchedulesList from '../schedules/list'
 import styles from './MySchedules.module.scss'
 
 const MySchedules = ({}: any) => {
-  const frontendContext = useFrontendContext()
-  const schedulesContext = useSchedulesContext()
-
   return (
     <>
       <Head>
@@ -22,7 +19,7 @@ const MySchedules = ({}: any) => {
       <main className={styles.main}>
         <Heading
           title="My Schedules"
-          description="A representation of your schedules ordered by date in ascending order"
+          description="You have scheduled activities for the following days"
         />
 
         <SchedulesList />
