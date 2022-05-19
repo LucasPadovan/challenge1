@@ -1,0 +1,13 @@
+.modalContent {
+  margin: 10px;
+}
+
+.closeButton {
+  position: absolute;
+  right: 0;
+  top: 0;
+  border: none;
+  cursor: pointer;
+  background-color: var(--background);
+  color: white;
+}

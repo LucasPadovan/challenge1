@@ -7,6 +7,7 @@ import FrontendContext from '../src/components/contexts/FrontendContext'
 import SchedulesContext from '../src/components/contexts/SchedulesContext'
 import NotificationsContext from '../src/components/contexts/NotificationsContext'
 import Notification from '../src/components/shared/notification'
+import ModalContainer from '../src/components/shared/modal'
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -22,6 +23,7 @@ function MyApp({ Component, pageProps }: AppProps) {
             </div>
             <div className="grid-right">
               <Notification />
+              <ModalContainer />
               <Component {...pageProps} />
             </div>
             <div className="grid-footer">
