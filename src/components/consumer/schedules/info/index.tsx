@@ -27,6 +27,27 @@ const ScheduleInfo = ({ schedule }: { schedule: ISchedule }) => {
     }
   }
 
+  const handleCancel = () => {
+    if (confirm('Are you sure you want to cancel this activity?')) {
+      schedulesContext.methods.cancelSchedule(schedule)
+      frontendContext.methods.setIsModalOpen(false)
+
+      setTimeout(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' })
+      }, 100)
+    }
+  }
+  const handleEnable = () => {
+    if (confirm('Are you sure you want to enable this activity?')) {
+      schedulesContext.methods.enableSchedule(schedule)
+      frontendContext.methods.setIsModalOpen(false)
+
+      setTimeout(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' })
+      }, 100)
+    }
+  }
+
   let content = (
     <div className={styles.scheduleInfoContainer}>
       <h1 className={styles.scheduleInfoRow}>{schedule.activityName}</h1>
@@ -43,6 +64,12 @@ const ScheduleInfo = ({ schedule }: { schedule: ISchedule }) => {
 
       <div className={styles.scheduleInfoRow}>
         <Button style="primary" onClick={handleEdit} title="Edit" />
+        {schedule.status === 'cancelled' ? (
+          <Button style="secondary" onClick={handleEnable} title="Enable" />
+        ) : (
+          <Button style="secondary" onClick={handleCancel} title="Cancel" />
+        )}
+
         <Button style="secondary" onClick={handleDelete} title="Delete" />
       </div>
     </div>

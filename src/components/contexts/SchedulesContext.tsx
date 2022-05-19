@@ -12,6 +12,8 @@ export interface ISchedulesContextMethods {
   addSchedule: (schedule: ISchedule) => void
   removeSchedule: (scheduleId: string) => void
   updateSchedule: (schedule: ISchedule) => void
+  cancelSchedule: (schedule: ISchedule) => void
+  enableSchedule: (schedule: ISchedule) => void
   setScheduleByDate: (schedules: any) => void
 }
 export interface ISchedulesContextState {
@@ -77,12 +79,13 @@ const SchedulesContextProvider = (props: { children: React.ReactElement }) => {
     const _newSchedule = {
       ...newSchedule,
       // Mocking a DB id, far from ideal but enough for the excersice
-      id: `${new Date().getTime()}`
+      id: `${new Date().getTime()}`,
+      status: 'filled'
     }
 
     const _userSchedules = [...(userSchedules ?? []), { ..._newSchedule }]
 
-    setUserSchedules(_userSchedules)
+    setUserSchedules(_userSchedules as any) // dunno why this triggers a warning due to the status field
     notificationsContext.methods.setGeneralNotification({
       type: 'success',
       message: 'Schedule added correctly. Click on `My Schedules` to see it.'
@@ -111,14 +114,37 @@ const SchedulesContextProvider = (props: { children: React.ReactElement }) => {
     })
   }
 
-  const updateSchedule = (schedule: ISchedule) => {
+  const updateScheduleFromArray = (schedule: ISchedule) => {
     const _userSchedules = removeFromArray(schedule.id ?? '')
     _userSchedules.push(schedule)
 
     setUserSchedules(_userSchedules)
+  }
+
+  const updateSchedule = (schedule: ISchedule) => {
+    updateScheduleFromArray(schedule)
+
     notificationsContext.methods.setGeneralNotification({
       type: 'info',
       message: 'Schedule updated correctly.'
+    })
+  }
+
+  const cancelSchedule = (schedule: ISchedule) => {
+    updateScheduleFromArray({ ...schedule, status: 'cancelled' })
+
+    notificationsContext.methods.setGeneralNotification({
+      type: 'error',
+      message: 'Schedule cancelled correctly.'
+    })
+  }
+
+  const enableSchedule = (schedule: ISchedule) => {
+    updateScheduleFromArray({ ...schedule, status: 'filled' })
+
+    notificationsContext.methods.setGeneralNotification({
+      type: 'success',
+      message: 'Schedule enabled again correctly.'
     })
   }
 
@@ -127,6 +153,8 @@ const SchedulesContextProvider = (props: { children: React.ReactElement }) => {
       addSchedule,
       removeSchedule,
       updateSchedule,
+      cancelSchedule,
+      enableSchedule,
       setScheduleByDate
     },
     state: {

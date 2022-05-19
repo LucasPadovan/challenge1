@@ -18,9 +18,19 @@ const DailyEntry = ({ schedule }: { schedule: ISchedule }) => {
     frontendContext.methods.setIsModalOpen(true)
   }
 
+  let className = `${styles.dailyEntry}`
+
+  if (schedule.status === 'cancelled') {
+    console.log(
+      '🚀 ~ file: DailyEntry.tsx ~ line 24 ~ DailyEntry ~ schedule.status',
+      schedule.status
+    )
+    className = `${className} ${styles.dailyEntryCancelled}`
+  }
+
   return (
     <button
-      className={styles.dailyEntry}
+      className={className}
       style={{
         top: `${startPosition}px`,
         height: `${height}px`

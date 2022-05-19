@@ -8,7 +8,8 @@ import styles from './ModalContainer.module.scss'
 
 const customStyles = {
   overlay: {
-    backgroundColor: 'rgba(0,0,0,0.3)'
+    backgroundColor: 'rgba(0,0,0,0.3)',
+    zIndex: 10
   },
   content: {
     top: '50%',
@@ -19,7 +20,8 @@ const customStyles = {
     transform: 'translate(-50%, -50%)',
     minHeight: '200px',
     minWidth: '40vw',
-    overflow: 'visible'
+    overflow: 'visible',
+    zIndex: 10
   }
 }
 

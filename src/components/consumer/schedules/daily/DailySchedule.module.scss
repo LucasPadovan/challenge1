@@ -41,11 +41,26 @@
   cursor: pointer;
   font-weight: bold;
   transition: var(--standardTransition);
+  z-index: 2;
 
   &:hover,
   &:focus {
-    z-index: 2;
+    z-index: 3;
     transform: scale(1.05);
     background-color: rgba(67, 138, 246);
+  }
+}
+
+.dailyEntryCancelled {
+  background-color: rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  width: 50%;
+  text-decoration: line-through;
+
+  &:hover,
+  &:focus {
+    z-index: 3;
+    transform: scale(1.05);
+    background-color: rgba(0, 0, 0, 0.2);
   }
 }

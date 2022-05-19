@@ -5,4 +5,5 @@ export interface ISchedule {
   endTime: string
   numMaxGuests: number
   id?: string
+  status?: 'cancelled' | 'filled'
 }
