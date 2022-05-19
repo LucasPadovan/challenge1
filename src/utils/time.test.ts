@@ -1,4 +1,9 @@
-import { buildDateString, buildTimeString, testTimeEntry } from './time'
+import {
+  buildDateString,
+  buildTimeString,
+  testStartEndTimeStrings,
+  testTimeEntry
+} from './time'
 
 describe('Time tests', () => {
   describe('testTimeEntry', () => {
@@ -15,6 +20,26 @@ describe('Time tests', () => {
       it(`should return false for entries like ${entry}`, () => {
         expect(testTimeEntry(entry)).toEqual(false)
       })
+    })
+  })
+
+  describe('testStartEndTimeStrings', () => {
+    it('should return true for start time lower than end time', () => {
+      const startTime = '12:00'
+      const endTime = '16:25'
+      expect(testStartEndTimeStrings(startTime, endTime)).toEqual(true)
+    })
+
+    it('should return false for start time lower than end time', () => {
+      const startTime = '12:00'
+      const endTime = '11:25'
+      expect(testStartEndTimeStrings(startTime, endTime)).toEqual(false)
+    })
+
+    it('should return false for weird dates', () => {
+      const startTime = 'asd'
+      const endTime = '11:25'
+      expect(testStartEndTimeStrings(startTime, endTime)).toEqual(false)
     })
   })
 

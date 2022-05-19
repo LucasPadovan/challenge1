@@ -7,7 +7,12 @@ import InputField from '../../../shared/form/InputField'
 import Button from '../../../shared/button'
 
 import styles from './SchedulesForm.module.scss'
-import { dateRegex, testTimeEntry, timeRegex } from '../../../../utils/time'
+import {
+  dateRegex,
+  testStartEndTime,
+  testTimeEntry,
+  timeRegex
+} from '../../../../utils/time'
 import { useSchedulesContext } from '../../../contexts/SchedulesContext'
 import { useFrontendContext } from '../../../contexts/FrontendContext'
 import DateField from '../../../shared/form/DateField'
@@ -24,13 +29,21 @@ const ScheduleSchema = Yup.object({
   startTime: Yup.string()
     .required('Required')
     .matches(timeRegex, 'Time format should be HH:MM')
-    // todo starting time should not be after ending time.
-    .test('', 'Max time allowed is 23:59', value => testTimeEntry(value)),
+    .test('', 'Max time allowed is 23:59', value => testTimeEntry(value))
+    .test(
+      '',
+      'Start time cannot be higher or equal than End time',
+      (_value, context) => testStartEndTime(context)
+    ),
   endTime: Yup.string()
     .required('Required')
     .matches(timeRegex, 'Time format should be HH:MM')
-    // todo starting time should not be after ending time.
-    .test('', 'Max time allowed is 23:59', value => testTimeEntry(value)),
+    .test('', 'Max time allowed is 23:59', value => testTimeEntry(value))
+    .test(
+      '',
+      'End time cannot be lower or equal than Start time',
+      (_value, context) => testStartEndTime(context)
+    ),
   numMaxGuests: Yup.number().required('Required')
 })
 

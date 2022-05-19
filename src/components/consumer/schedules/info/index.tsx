@@ -12,6 +12,21 @@ const ScheduleInfo = ({ schedule }: { schedule: ISchedule }) => {
   const frontendContext = useFrontendContext()
   const [isEditing, setIsEditing] = React.useState<boolean>(false)
 
+  const handleEdit = () => {
+    setIsEditing(true)
+  }
+
+  const handleDelete = () => {
+    if (confirm('Are you sure you want to delete this activity?')) {
+      schedulesContext.methods.removeSchedule(schedule.id ?? '')
+      frontendContext.methods.setIsModalOpen(false)
+
+      setTimeout(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' })
+      }, 100)
+    }
+  }
+
   let content = (
     <div className={styles.scheduleInfoContainer}>
       <h1 className={styles.scheduleInfoRow}>{schedule.activityName}</h1>
@@ -27,25 +42,8 @@ const ScheduleInfo = ({ schedule }: { schedule: ISchedule }) => {
       </p>
 
       <div className={styles.scheduleInfoRow}>
-        <Button
-          style="primary"
-          onClick={() => {
-            setIsEditing(true)
-          }}
-          title="Edit"
-        />
-        <Button
-          style="secondary"
-          onClick={() => {
-            schedulesContext.methods.removeSchedule(schedule.id ?? '')
-            frontendContext.methods.setIsModalOpen(false)
-
-            setTimeout(() => {
-              window.scrollTo({ top: 0, behavior: 'smooth' })
-            }, 100)
-          }}
-          title="Delete"
-        />
+        <Button style="primary" onClick={handleEdit} title="Edit" />
+        <Button style="secondary" onClick={handleDelete} title="Delete" />
       </div>
     </div>
   )

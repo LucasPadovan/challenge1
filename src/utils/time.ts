@@ -18,6 +18,25 @@ export const testTimeEntry = (value?: string) => {
   return result
 }
 
+export const testStartEndTime = (context?: any) => {
+  const startTime = context.parent.startTime ?? ''
+  const endTime = context.parent.endTime ?? ''
+
+  return testStartEndTimeStrings(startTime, endTime)
+}
+
+export const testStartEndTimeStrings = (startTime: string, endTime: string) => {
+  // Convert to dates to make them easier to compare
+  try {
+    const fullStartDate = new Date(`2022/05/29 ${startTime}`)
+    const fullEndDate = new Date(`2022/05/29 ${endTime}`)
+
+    return fullStartDate < fullEndDate
+  } catch (error) {
+    return false
+  }
+}
+
 export const buildDateString = (dateTime: Date | null) => {
   let date = ''
 
