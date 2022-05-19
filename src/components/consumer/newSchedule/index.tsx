@@ -8,7 +8,7 @@ import styles from './NewSchedule.module.scss'
 const NewSchedule = ({}: any) => (
   <>
     <Head>
-      <title>New schedule</title>
+      <title>Schedule new activity</title>
       <meta
         name="description"
         content="Create a new schedule tied to your user"
@@ -18,8 +18,8 @@ const NewSchedule = ({}: any) => (
 
     <main className={styles.main}>
       <Heading
-        title="New Schedule form"
-        description="Please fill all the fields in the form to create you schedule"
+        title="Schedule new activity"
+        description="Please fill all the fields in the form to schedule your activity"
       />
 
       <SchedulesForm />

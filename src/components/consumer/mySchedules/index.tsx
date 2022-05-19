@@ -11,14 +11,14 @@ const MySchedules = ({}: any) => {
   return (
     <>
       <Head>
-        <title>My schedules</title>
-        <meta name="description" content="Schedules I have created" />
+        <title>My schedule</title>
+        <meta name="description" content="Activities I have scheduled" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <main className={styles.main}>
         <Heading
-          title="My Schedules"
+          title="My Schedule"
           description="You have scheduled activities for the following days"
         />
 

@@ -1,4 +1,5 @@
 import React from 'react'
+import { IGroupedSchedule } from '../../../../utils/schedules'
 import { useSchedulesContext } from '../../../contexts/SchedulesContext'
 import DailySchedule from '../daily'
 
@@ -23,13 +24,10 @@ const SchedulesList = () => {
   return (
     <div className={styles.calendarListContainer}>
       <div className={styles.calendarList}>
-        {Object.keys(schedulesByDate).map((day: string) => {
+        {schedulesByDate.map(({ key, schedules }: IGroupedSchedule) => {
           return (
-            <div key={day}>
-              <DailySchedule
-                day={day}
-                schedulesForThisDay={schedulesByDate[day]}
-              />
+            <div key={key}>
+              <DailySchedule day={key} schedulesForThisDay={schedules} />
             </div>
           )
         })}

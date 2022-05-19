@@ -9,7 +9,7 @@ const Notification = ({}: any) => {
   React.useEffect(() => {
     setTimeout(() => {
       notificationsContext.methods.setGeneralNotification({})
-    }, 30000)
+    }, 40000)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [notificationsContext.state.generalNotification])
 

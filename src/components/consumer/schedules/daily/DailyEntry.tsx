@@ -21,10 +21,6 @@ const DailyEntry = ({ schedule }: { schedule: ISchedule }) => {
   let className = `${styles.dailyEntry}`
 
   if (schedule.status === 'cancelled') {
-    console.log(
-      '🚀 ~ file: DailyEntry.tsx ~ line 24 ~ DailyEntry ~ schedule.status',
-      schedule.status
-    )
     className = `${className} ${styles.dailyEntryCancelled}`
   }
 

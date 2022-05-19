@@ -22,8 +22,9 @@ const Home: NextPage = () => (
       />
 
       <div className={styles.grid}>
-        <a href="/newSchedule" className={styles.card}>
-          <h2>Create a new schedule &rarr;</h2>
+        {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
+        <a href="/newActivity" className={styles.card}>
+          <h2>Schedule a new activity &rarr;</h2>
           <p>
             Click on this card to fill the form where you can pick your
             preferred time

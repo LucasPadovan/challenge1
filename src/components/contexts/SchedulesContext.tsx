@@ -1,5 +1,5 @@
 import React from 'react'
-import { groupSchedulesByDate } from '../../utils/schedules'
+import { sortSchedulesByDate } from '../../utils/schedules'
 import { ISchedule } from '../consumer/schedules/constants'
 import { useFrontendContext } from './FrontendContext'
 import { useNotificationsContext } from './NotificationsContext'
@@ -71,7 +71,7 @@ const SchedulesContextProvider = (props: { children: React.ReactElement }) => {
     }
 
     // Allows for a simpler object to keep the schedules and the sorting is done on a single place.
-    setScheduleByDate(groupSchedulesByDate(userSchedules))
+    setScheduleByDate(sortSchedulesByDate(userSchedules))
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userSchedules])
 
