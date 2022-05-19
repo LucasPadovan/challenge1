@@ -18,7 +18,8 @@ const customStyles = {
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)',
     minHeight: '200px',
-    minWidth: '40vw'
+    minWidth: '40vw',
+    overflow: 'visible'
   }
 }
 

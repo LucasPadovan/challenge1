@@ -15,12 +15,15 @@ const ScheduleInfo = ({ schedule }: { schedule: ISchedule }) => {
   let content = (
     <div className={styles.scheduleInfoContainer}>
       <h1 className={styles.scheduleInfoRow}>{schedule.activityName}</h1>
-      <p className={styles.scheduleInfoRow}>Date:{schedule.date}</p>
       <p className={styles.scheduleInfoRow}>
-        From: {schedule.startTime} - To: {schedule.endTime}
+        Date: <strong>{schedule.date}</strong>
       </p>
       <p className={styles.scheduleInfoRow}>
-        Max assistants: {schedule.numMaxGuests}
+        From: <strong>{schedule.startTime}</strong> - To:{' '}
+        <strong>{schedule.endTime}</strong>
+      </p>
+      <p className={styles.scheduleInfoRow}>
+        Max assistants: <strong>{schedule.numMaxGuests}</strong>
       </p>
 
       <div className={styles.scheduleInfoRow}>

@@ -10,6 +10,8 @@ import styles from './SchedulesForm.module.scss'
 import { dateRegex, testTimeEntry, timeRegex } from '../../../../utils/time'
 import { useSchedulesContext } from '../../../contexts/SchedulesContext'
 import { useFrontendContext } from '../../../contexts/FrontendContext'
+import DateField from '../../../shared/form/DateField'
+import TimeField from '../../../shared/form/TimeField'
 
 const ScheduleSchema = Yup.object({
   activityName: Yup.string()
@@ -87,19 +89,19 @@ const SchedulesForm = ({ scheduleValues }: { scheduleValues?: ISchedule }) => {
             type="text"
             placeholder="Hiking"
           />
-          <InputField
+          <DateField
             label="Date"
             name="date"
             type="text"
-            placeholder="05/23/2022"
+            placeholder="MM/DD/YYYY"
           />
-          <InputField
+          <TimeField
             label="Start time"
             name="startTime"
             type="text"
             placeholder="12:00"
           />
-          <InputField
+          <TimeField
             label="End time"
             name="endTime"
             type="text"

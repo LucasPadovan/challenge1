@@ -17,3 +17,40 @@ export const testTimeEntry = (value?: string) => {
 
   return result
 }
+
+export const buildDateString = (dateTime: Date | null) => {
+  let date = ''
+
+  try {
+    // Allows it to fail for non date stuff and unexpecteds to return an empty string
+    const unsafeDateTime = dateTime as any
+    const year = unsafeDateTime.getFullYear()
+    const month = (1 + (unsafeDateTime.getMonth() ?? 0))
+      .toString()
+      .padStart(2, '0')
+    let day = unsafeDateTime.getDate().toString().padStart(2, '0')
+
+    date = `${month}/${day}/${year}`
+  } catch {}
+
+  return date
+}
+
+export const buildTimeString = (dateTime: Date | null) => {
+  let time = ''
+
+  try {
+    // Allows it to fail for non date stuff and unexpecteds to return an empty string
+    const unsafeDateTime = dateTime as any
+    const hours = unsafeDateTime.getHours()
+    let minutes = unsafeDateTime.getMinutes()
+
+    if (minutes < 10) {
+      minutes = `0${minutes}`
+    }
+
+    time = `${hours}:${minutes}`
+  } catch {}
+
+  return time
+}

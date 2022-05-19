@@ -2,15 +2,16 @@
   margin-bottom: 10px;
   display: flex;
   flex-direction: column;
+
+  input,
+  .input {
+    padding: 5px 10px;
+    border-radius: 4px;
+    width: 300px;
+    border: 2px solid var(--backgroundHover);
+  }
 }
 
 .errorField {
   color: var(--errorColor);
-}
-
-.input {
-  padding: 5px 10px;
-  border-radius: 4px;
-  width: 300px;
-  border: 2px solid var(--backgroundHover);
 }
