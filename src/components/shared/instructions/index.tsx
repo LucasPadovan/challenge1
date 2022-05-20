@@ -11,8 +11,8 @@ const Instructions = ({}: any) => {
           timeslot.
         </li>
         <li>
-          Clicking on that CTA should open a form where you can "save" the
-          timeslot details (i.e. "schedule" the timeslot).
+          Clicking on that CTA should open a form where you can `save` the
+          timeslot details (i.e. `schedule`` the timeslot).
         </li>
         <li>
           Display the timeslots that have been scheduled, sorted in an intuitive
@@ -25,7 +25,7 @@ const Instructions = ({}: any) => {
         <li>All Level 1 requirements</li>
         <li>
           Include a mechanism to cancel a timeslot with an accompanying
-          "canceled" state.
+          `canceled` state.
         </li>
         <li>Include a mechanism to update a timeslot that was scheduled.</li>
         <li>
@@ -48,7 +48,7 @@ const Instructions = ({}: any) => {
           looks if timeslots are scheduled to be at the same time, or otherwise
           overlapping. We want to see how you would tackle the technical
           challenges of displaying the timeslots, not how other libraries have
-          solved this problem, so please don't pull in other libraries to do the
+          solved this problem, so please don`t pull in other libraries to do the
           heavy lifting. 😁
         </li>
         <li>

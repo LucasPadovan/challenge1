@@ -62,8 +62,8 @@ const Home: NextPage = () => (
         <li>
           You can run test by typing <strong>`npm run test`</strong> for a
           couple of unit testin and <strong>`npm run cypress:run`</strong> for a
-          couple of integration testing. (It should work fine but also I'm using
-          a weird Windows + WSL to run cypress so I'll leave a video with them
+          couple of integration testing. (It should work fine but also I`m using
+          a weird Windows + WSL to run cypress so I`ll leave a video with them
           running)
         </li>
         <li>
