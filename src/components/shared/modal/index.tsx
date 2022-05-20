@@ -60,12 +60,13 @@ const ModalContainer = () => {
       // Ideally I would not do this. Just for the excersice because it is simpler to have it disabled
       ariaHideApp={false}
     >
-      <div className={styles.modalContent}>
+      <div className={styles.modalContent} data-cy="modal-content">
         <button
           className={styles.closeButton}
           onClick={() => {
             frontendContext.methods.setIsModalOpen(false)
           }}
+          data-cy="modal-close"
         >
           X
         </button>

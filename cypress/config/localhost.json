@@ -1,0 +1,10 @@
+{
+  "baseUrl": "http://localhost:3000",
+  "ignoreTestFiles": ["**/cypress/integration/examples/*"],
+  "testFiles": ["**/*.cy.spec.[t|j]s", "**/*.cy.test.[t|j]s"],
+  "env": {
+    "environment": "localhost"
+  },
+  "screenshotOnRunFailure": false,
+  "video": false
+}

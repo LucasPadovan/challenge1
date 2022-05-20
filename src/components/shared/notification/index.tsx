@@ -21,7 +21,11 @@ const Notification = ({}: any) => {
   const type = notificationsContext.state.generalNotification.type ?? 'info'
   const className = `${styles.notification} ${styles[type]}`
 
-  return <div className={className}>{message}</div>
+  return (
+    <div className={className} data-cy="notification">
+      {message}
+    </div>
+  )
 }
 
 export default Notification

@@ -63,14 +63,34 @@ const ScheduleInfo = ({ schedule }: { schedule: ISchedule }) => {
       </p>
 
       <div className={styles.scheduleInfoRow}>
-        <Button style="primary" onClick={handleEdit} title="Edit" />
+        <Button
+          style="primary"
+          onClick={handleEdit}
+          title="Edit"
+          data-cy="daily-entry-edit"
+        />
         {schedule.status === 'cancelled' ? (
-          <Button style="secondary" onClick={handleEnable} title="Enable" />
+          <Button
+            style="secondary"
+            onClick={handleEnable}
+            title="Enable"
+            data-cy="daily-entry-enable"
+          />
         ) : (
-          <Button style="secondary" onClick={handleCancel} title="Cancel" />
+          <Button
+            style="secondary"
+            onClick={handleCancel}
+            title="Cancel"
+            data-cy="daily-entry-cancel"
+          />
         )}
 
-        <Button style="secondary" onClick={handleDelete} title="Delete" />
+        <Button
+          style="secondary"
+          onClick={handleDelete}
+          title="Delete"
+          data-cy="daily-entry-delete"
+        />
       </div>
     </div>
   )

@@ -8,7 +8,9 @@
     "start": "next start",
     "lint": "next lint",
     "test": "jest",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "cypress:open": "cypress open --env configFile=localhost",
+    "cypress:run": "cypress run --env configFile=localhost"
   },
   "dependencies": {
     "formik": "^2.2.9",

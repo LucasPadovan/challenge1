@@ -6,7 +6,8 @@ const Button = ({
   type = 'button',
   title,
   style = 'primary',
-  onClick
+  onClick,
+  ...props
 }: {
   title: string
   type?: 'button' | 'submit' | 'reset'
@@ -20,6 +21,7 @@ const Button = ({
       className={`${styles.button} ${className}`}
       type={type}
       onClick={onClick}
+      {...props}
     >
       {title}
     </button>

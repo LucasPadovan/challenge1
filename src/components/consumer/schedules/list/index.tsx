@@ -26,7 +26,7 @@ const SchedulesList = () => {
       <div className={styles.calendarList}>
         {schedulesByDate.map(({ key, schedules }: IGroupedSchedule) => {
           return (
-            <div key={key}>
+            <div key={key} data-cy="list-day">
               <DailySchedule day={key} schedulesForThisDay={schedules} />
             </div>
           )

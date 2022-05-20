@@ -9,7 +9,7 @@ const NavBar = ({}: any) => {
     <nav className={styles.navbar}>
       <ul className={styles.navbarList}>
         {LINKS.map(({ href, label }: { href: string; label: string }) => (
-          <li className={styles.navbarItem} key={href}>
+          <li className={styles.navbarItem} key={href} data-cy={label}>
             <Link href={href}>{label}</Link>
           </li>
         ))}

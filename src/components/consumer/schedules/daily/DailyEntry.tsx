@@ -32,6 +32,7 @@ const DailyEntry = ({ schedule }: { schedule: ISchedule }) => {
         height: `${height}px`
       }}
       onClick={handleOpenMenu}
+      data-cy={`daily-entry-${schedule.activityName}`}
     >
       {schedule.activityName}
     </button>
