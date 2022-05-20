@@ -64,7 +64,7 @@ const Home: NextPage = () => (
           couple of unit testin and <strong>`npm run cypress:run`</strong> for a
           couple of integration testing. (It should work fine but also I`m using
           a weird Windows + WSL to run cypress so I`ll leave a video with them
-          running)
+          running inside the `docs` folder)
         </li>
         <li>
           React Testing Library was ommited for the sake of simplicity and to
