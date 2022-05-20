@@ -31,6 +31,47 @@ const Home: NextPage = () => (
           </p>
         </a>
       </div>
+
+      <h2>Challenge tech details</h2>
+      <ul>
+        <li>React + Next + Scss</li>
+        <li>Prettier and eslint have been configured for the project</li>
+        <li>It will be uploaded to Vercel using a free account</li>
+        <li>SSR is not enabled to keep it simple</li>
+        <li>
+          No DB was installed but some traces of the mongo connector are
+          available
+        </li>
+        <li>
+          Persistent schedules are using the local storage with a user ID to
+          simulate it
+        </li>
+        <li>
+          Frontend context handles the things that appear on screen (no loadings
+          have been put in place though)
+        </li>
+        <li>
+          Notifications context handles the notifications that will appear on
+          screen
+        </li>
+        <li>
+          Schedules context handles the live storage for the schedules and also
+          handles saving them to local storage (as well as recovering them on
+          start!)
+        </li>
+        <li>
+          You can run test by typing <strong>`npm run test`</strong> for a
+          couple of unit testin and <strong>`npm run cypress:run`</strong> for a
+          couple of integration testing. (It should work fine but also I'm using
+          a weird Windows + WSL to run cypress so I'll leave a video with them
+          running)
+        </li>
+        <li>
+          React Testing Library was ommited for the sake of simplicity and to
+          get things done on time, unit and integration cover a good chunk of
+          the app `heavy` parts
+        </li>
+      </ul>
     </main>
   </>
 )
