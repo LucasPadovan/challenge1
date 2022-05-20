@@ -5,6 +5,7 @@ import { useFrontendContext } from './FrontendContext'
 import { useNotificationsContext } from './NotificationsContext'
 
 import remove from 'lodash/remove'
+import { buildDateString } from '../../utils/time'
 
 const SCHEDULES_KEY = 'schedules'
 
@@ -57,6 +58,8 @@ const SchedulesContextProvider = (props: { children: React.ReactElement }) => {
       const _userSchedules = JSON.parse(schedules)[_userId]
       setUserSchedules(_userSchedules ?? [])
       frontendContext.methods.setIsLoading(false)
+    } else {
+      _createEmptyScheduleForToday()
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [_userId])
@@ -146,6 +149,13 @@ const SchedulesContextProvider = (props: { children: React.ReactElement }) => {
       type: 'success',
       message: 'Schedule enabled again correctly.'
     })
+  }
+
+  const _createEmptyScheduleForToday = () => {
+    const todayDate = new Date()
+    const todayString = buildDateString(todayDate)
+
+    setScheduleByDate([{ key: todayString, schedules: [] }])
   }
 
   const exportedValues: ISchedulesContextProviderProps = {

@@ -35,6 +35,16 @@ const Home: NextPage = () => (
       <h2>Challenge tech details</h2>
       <ul>
         <li>React + Next + Scss</li>
+        <ul>
+          <li>
+            Css classes are using camelCase as a naming convention derived from
+            the use of css/scss modules with next.
+          </li>
+          <li>
+            When using classes it usually imports the styles as an object and
+            then are accessed
+          </li>
+        </ul>
         <li>Prettier and eslint have been configured for the project</li>
         <li>It will be uploaded to Vercel using a free account</li>
         <li>SSR is not enabled to keep it simple</li>

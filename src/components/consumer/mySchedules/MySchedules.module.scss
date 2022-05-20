@@ -5,3 +5,19 @@
   justify-content: center;
   align-items: center;
 }
+
+.cta {
+  padding: 10px 20px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  text-transform: capitalize;
+  color: white;
+  background-color: var(--background);
+  transition: var(--standardTransition);
+
+  &:hover {
+    transform: scale(1.05);
+  }
+}

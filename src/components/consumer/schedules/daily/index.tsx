@@ -1,4 +1,5 @@
 import React from 'react'
+import { buildDateString } from '../../../../utils/time'
 import { ISchedule } from '../constants'
 import DailyEntry from './DailyEntry'
 
@@ -17,9 +18,22 @@ const DailySchedule = ({ day, schedulesForThisDay }: any) => {
       <DailyEntry key={schedule.id} schedule={schedule} />
     ))
 
+  const _isToday = () => {
+    const todayDate = new Date()
+    const todayString = buildDateString(todayDate)
+
+    return day === todayString
+  }
+
+  let titleClassName = styles.schedulesDailyTitle
+
+  if (_isToday()) {
+    titleClassName = `${titleClassName} ${styles.schedulesDailyTitleToday}`
+  }
+
   return (
     <div className={styles.schedulesDaily}>
-      <h4 className={styles.schedulesDailyTitle}>{day}</h4>
+      <h4 className={titleClassName}>{day}</h4>
       <div className={styles.hourlyDivisors}>
         {renderHourlyDivisors()}
         {renderSchedulesForThisDay()}
