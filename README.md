@@ -33,6 +33,10 @@ npm run cypress:open # Will open cypress window
 npm run cypress:run # Will run cypress headless
 ```
 
+# Planned Improvements
+
+See [Improvements](./docs/IMPROVEMENTS.md)
+
 # TODO
 
 - Adding a couple more days to the calendar view to have a better look
